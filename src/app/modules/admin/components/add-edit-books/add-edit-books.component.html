@@ -1,0 +1,39 @@
+<div class="container-fluid mb-4">
+    <div class="row">
+        <div class="col-md-8 col-xl-5 mx-auto">
+            <h5 *ngIf="!isEditMode" class="mb-3">Agregar Libro</h5>
+            <h5 *ngIf="isEditMode" class="mb-3">Editar Libro</h5>
+            <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título</label>
+                    <input formControlName="title"
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        placeholder="ej. Sí... ¡de acuerdo! Cómo negociar sin ceder"
+                        aria-describedby="titleHelp">
+                    <div id="titleHelp" class="form-text">
+                        * El campo es requerido.<br>
+                        * Longitud mínima 6 caracteres.<br>
+                        Asegúrate de no agregar un libro que ya exista.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="author" class="form-label">Autor</label>
+                    <input formControlName="author"
+                        type="text"
+                        class="form-control"
+                        id="author"
+                        placeholder="ej. Roger Fisher, William Ury, Bruce Patton">
+                </div>
+
+                <button type="submit"
+                    [disabled]="!bookForm.valid || bookForm.pristine"
+                    class="btn btn-success">
+                    <i class="far fa-save me-2"></i>Guardar
+                </button>
+            </form>
+        </div>        
+    </div>
+</div>

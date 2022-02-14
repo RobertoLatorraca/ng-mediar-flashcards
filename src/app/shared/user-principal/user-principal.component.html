@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row row-cols-auto justify-content-start">
+        <div class="col">
+            <img *ngIf="decodedToken.picture" class="rounded-circle" [src]="decodedToken.picture">
+            <span id="user-picture" *ngIf="!decodedToken.picture"><i class="fas fa-user"></i></span>
+        </div>
+        <div class="col">
+            <p>
+                <span class="fw-bold">{{decodedToken.name}}</span>
+                <span *ngIf="userProvider == 'LOCAL'"><i class="fas fa-pencil-alt ms-2"></i></span><br>
+                <span *ngIf="!decodedToken.socialEmail">{{"[ " + decodedToken.sub + " ]"}}</span>
+                <span *ngIf="decodedToken.socialEmail">{{"[ " + decodedToken.socialEmail + " ]"}}</span>                  
+            </p>
+        </div>
+    </div>
+</div>

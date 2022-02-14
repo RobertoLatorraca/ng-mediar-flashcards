@@ -1,0 +1,39 @@
+<div class="container-fluid mb-4">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Estado</th>            
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users; let i = index" >
+            <th scope="row">{{i + 1}}</th>
+            <td>
+                <img *ngIf="user.picture"
+                    class="rounded-circle"
+                    [src]="user.picture">
+            </td>
+            <td>{{user.name}}</td>
+            <td>{{user.provider == "LOCAL" ? user.username : user.username + " [" + user.socialEmail + "]"}}</td>
+            <td>{{user.provider}}</td>
+            <td>{{user.authorities}}</td>
+            <td>
+                <span *ngIf="user.enabled" class="badge bg-success">Habilitado</span>
+                <span *ngIf="!user.enabled" class="badge bg-danger">Deshabilitado</span>
+            </td>
+            <td>
+                <i class="fas fa-pencil-alt me-2"></i>
+                <span *ngIf="user.provider == 'LOCAL'"><i class="fas fa-key me-2"></i></span>
+                <span *ngIf="!(principalUsername == user.username)"><i class="fas fa-ban"></i></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

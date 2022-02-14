@@ -1,0 +1,36 @@
+<div class="container-fluid mb-4">
+
+    <button type="button" class="btn btn-success" (click)="addFlashcard()"><i class="fas fa-plus me-2"></i>Nueva tajeta</button>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Título<i class="fas fa-sort ms-2"></i></th>
+            <th scope="col">Tema<i class="fas fa-sort ms-2"></i></th>
+            <th scope="col">Libro<i class="fas fa-sort ms-2"></i></th>
+            <th scope="col">Módulo<i class="fas fa-sort ms-2"></i></th>
+            <th scope="col">Estado</th>            
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let flashcard of flashcards; let i = index">
+            <th scope="row">{{ i + 1}}</th>
+            <td>{{flashcard.title}}</td>
+            <td>{{flashcard.topic.topic}}</td>
+            <td>{{flashcard.book.title}}</td>
+            <td>{{flashcard.module.module}}</td>
+            <td>
+                <span *ngIf="flashcard.enabled" class="badge bg-success">Habilitado</span>
+                <span *ngIf="!flashcard.enabled" class="badge bg-danger">Deshabilitado</span>
+            </td>
+            <td>
+                <a><i class="fas fa-search me-2"></i></a>
+                <a (click)="editFlashcard(flashcard)"><i class="fas fa-pencil-alt me-2"></i></a>
+                <a (click)="toggleFlashcardEnabled(flashcard)"><i class="fas fa-ban"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

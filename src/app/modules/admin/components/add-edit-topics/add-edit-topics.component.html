@@ -1,0 +1,33 @@
+<div class="container-fluid mb-4">
+    <div class="row">
+        <div class="col-md-8 col-xl-5 mx-auto">
+            <h5 *ngIf="!isEditMode" class="mb-3">Agregar Tema</h5>
+            <h5 *ngIf="isEditMode" class="mb-3">Editar Tema</h5>
+            <form [formGroup]="topicForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="topic" class="form-label">Tema</label>
+                    <input formControlName="topic"
+                        type="text"
+                        class="form-control"
+                        id="topic"
+                        placeholder="ej. Método de Negociación de Harvard"
+                        aria-describedby="topicHelp">
+                    <div id="topicHelp" class="form-text">
+                        * El campo es requerido.<br>
+                        * Longitud mínima 6 caracteres.<br>
+                        Asegúrate de no agregar un tema que ya exista.
+                    </div>
+                </div>
+            
+                <button type="submit"
+                    [disabled]="!topicForm.valid || topicForm.pristine"
+                    class="btn btn-success">
+                    <i class="far fa-save me-2"></i>Guardar
+                </button>
+            </form>
+        </div>        
+    </div>
+</div>
+
+
+

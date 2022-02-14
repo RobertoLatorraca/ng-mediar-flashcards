@@ -1,0 +1,43 @@
+<div *ngIf="is401Unauthorized" class="alert alert-danger" role="alert">
+    Email y/o contraseña incorrectos.
+</div>
+<div *ngIf="isInternalServerError" class="alert alert-danger" role="alert">
+    Internal Server Error (500).<br>
+    Contacte con el administrador.
+</div>
+<form [formGroup]="signInForm" (ngSubmit)="signIn()">
+    <label for="usernameInput" class="d-block text-start">Email</label>
+    <input formControlName="username"
+        type="text"
+        id="usernameInput"
+        placeholder="Ingresá tu email"
+        class="d-block form-control"
+        [class.not-valid]="isEmailInvalid()">
+    <div *ngIf="isEmailInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        El email es requerido.
+    </div>
+    <label for="passwordInput" class="d-block text-start">Contraseña</label>
+    <input formControlName="password"
+        type="password"
+        id="passwordInput"
+        placeholder="Ingresá tu contraseña"
+        class="d-block form-control"
+        [class.not-valid]="isPasswordRequiredInvalid()">
+    <div *ngIf="isPasswordRequiredInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        La contraseña es requerida.
+    </div>
+
+    <a class="d-block text-end my-3 text-black"
+        style="font-size: .85rem;">¿Olvidaste tu contraseña?</a>
+    <button type="submit" class="btn btn-success mb-4">Ingresar</button>
+</form>
+
+<p class="card-text">O ingresa usando</p>
+
+<div class="d-flex justify-content-center mb-3">
+    <app-google-signin></app-google-signin>
+</div>
+
+<div class="d-block mt-3">
+    <span>¿No tienes cuenta? <a class="text-black" [routerLink]="['/auth/register']">Regístrate ahora</a></span>
+</div>

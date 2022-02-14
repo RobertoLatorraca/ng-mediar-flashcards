@@ -1,0 +1,31 @@
+<div class="container-fluid mb-4">
+
+    <button type="button" class="btn btn-success" (click)="addBook()"><i class="fas fa-plus me-2"></i>Agregar libro</button>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Título</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let book of books; let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>
+                <span *ngIf="book.enabled" class="badge bg-success">Habilitado</span>
+                <span *ngIf="!book.enabled" class="badge bg-danger">Deshabilitado</span>
+            </td>
+            <td>
+                <a (click)="editBook(book)"><i class="fas fa-pencil-alt me-2"></i></a>
+                <a (click)="toggleBookEnabled(book)"><i class="fas fa-ban"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

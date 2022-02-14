@@ -1,0 +1,56 @@
+<h6 class="mb-3">Registrar nuevo usuario</h6>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+    <label for="nameInput" class="d-block text-start">Nombre</label>
+    <input type="text"
+        id="nameInput"
+        placeholder="Ingresá tu nombre"
+        class="d-block form-control"
+        [class.not-valid]="isNameRequiredInvalid() || isNameMinLengthInvalid()"
+        [formControl]="$any(registerForm).controls['name']">
+    <div *ngIf="isNameRequiredInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        El nombre es requerido.
+    </div>
+    <div *ngIf="isNameMinLengthInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        Longitud mínima de 3 caracteres.
+    </div>
+    <label for="usernameInput" class="d-block text-start">Email</label>
+    <input type="text"
+        id="usernameInput"
+        placeholder="Ingresá tu email"
+        class="d-block form-control"
+        [class.not-valid]="isEmailInvalid()"
+        [formControl]="$any(registerForm).controls['username']">
+    <div *ngIf="isEmailInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        El email es requerido.
+    </div>
+    <label for="passwordInput" class="d-block text-start">Contraseña</label>
+    <input type="password"
+        id="passwordInput"
+        placeholder="Ingresá tu contraseña"
+        class="d-block form-control"
+        [class.not-valid]="isPasswordRequiredInvalid() || isPasswordMinLengthInvalid()"
+        [formControl]="$any(registerForm).controls['password']">
+    <div *ngIf="isPasswordRequiredInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        La contraseña es requerida.
+    </div>
+    <div *ngIf="isPasswordMinLengthInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        Longitud mínima de 6 caracteres.
+    </div>
+    <label for="confirmPasswordInput" class="d-block text-start">Repetir contraseña</label>
+    <input type="password"
+        id="confirmPasswordInput"
+        placeholder="Repetí la contraseña"
+        class="d-block form-control"
+        [class.not-valid]="isConfirmPasswordRequiredInvalid() || isConfirmPasswordMatchInvalid()"
+        [formControl]="$any(registerForm).controls['confirmPassword']">
+    <div *ngIf="isConfirmPasswordRequiredInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        Debe repetir la contraseña.
+    </div>
+    <div *ngIf="isConfirmPasswordMatchInvalid()" class="text-start text-danger" style="font-size: .7rem;">
+        Las contraseñas no coinciden.
+    </div>
+    <a class="d-block text-end my-3 text-black"
+        style="font-size: .7rem;"
+        [routerLink]="['/auth/signin']">¿Ya tenes cuenta?</a>
+    <button type="submit" class="btn btn-success mb-4">Registrarte</button>
+</form>

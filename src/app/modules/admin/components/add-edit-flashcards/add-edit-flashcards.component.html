@@ -1,0 +1,142 @@
+<div class="container-fluid mb-4">
+    <div class="row">
+        <div class="col-md-8 col-xl-5 mx-auto">
+            <h5 *ngIf="!isEditMode" class="mb-3">Agregar Tarjeta</h5>
+            <h5 *ngIf="isEditMode" class="mb-3">Editar Tarjeta</h5>
+            <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Título</label>
+                    <input formControlName="title"
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        placeholder="ej. Principios del Método de Negociación de Harvard"
+                        aria-describedby="titleHelp">
+                    <div id="titleHelp" class="form-text">
+                        * El campo es requerido.<br>
+                        * Longitud mínima 6 caracteres.<br>
+                        Asegúrate de no agregar una tarjeta que ya exista.
+                    </div>
+                </div>
+
+                <div formGroupName="module" class="mb-3">
+                    <label for="module" class="form-label">Módulo</label>
+                    <select formControlName="id"
+                        id="module"
+                        class="form-select"
+                        aria-label="Selector de módulos">
+                        <option value="">Seleccioná un módulo de la lista</option>
+                        <option 
+                            *ngFor="let module of modules; let i = index"
+                            [ngValue]="module.id">
+                            {{module.module}}
+                        </option>
+                    </select>
+                    <div id="moduleSelectHelp" class="form-text">
+                        * El campo es requerido.
+                    </div>
+                </div>
+
+                <div formGroupName="book" class="mb-3">
+                    <label for="book" class="form-label">Bibliografía</label>
+                    <select formControlName="id"
+                        id="book"
+                        class="form-select"
+                        aria-label="Selector de bibliografía">
+                        <option value="">Seleccioná un libro de la lista</option>
+                        <option 
+                            *ngFor="let book of books; let i = index"
+                            [ngValue]="book.id">
+                            {{book.title + ' [' + book.author + ']'}}
+                        </option>
+                    </select>
+                    <div id="bibliographySelectHelp" class="form-text">
+                        * El campo es requerido.<br>
+                        Si el libro que buscás no esta en la lista comunicate con el administrador para que lo agregue.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="pageOfBook" class="form-label">Páginas del libro</label>
+                    <input formControlName="pageOfBook"
+                        type="text"
+                        class="form-control"
+                        id="pageOfBook"
+                        placeholder="ej. 115 a 123"
+                        aria-describedby="pageOfBookHelp">
+                        <div id="pageOfBookHelp" class="form-text">
+                            Indica las páginas del libro donde se encuentra el tema de la tarjeta.
+                        </div>
+                </div>
+
+                <div formGroupName="topic" class="mb-3">
+                    <label for="topic" class="form-label">Tema</label>
+                    <select formControlName="id"
+                        id="topic"
+                        class="form-select"
+                        aria-label="Selector de temas">
+                        <option value="">Seleccioná un tema de la lista</option>
+                        <option 
+                            *ngFor="let topic of topics; let i = index"
+                            [ngValue]="topic.id">
+                            {{topic.topic}}
+                        </option>
+                    </select>
+                    <div id="topicSelectHelp" class="form-text">
+                        * El campo es requerido.<br>
+                        Si el tema que buscás no esta en la lista comunicate con el administrador para que lo agregue.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="flashcardFront" class="form-label">Frente</label>
+                    <editor formControlName="question"
+                        [init]="{
+                            menubar: false,
+                            plugins: [
+                              'advlist autolink autoresize lists link image charmap print preview anchor',
+                              'searchreplace visualblocks code fullscreen',
+                              'insertdatetime media table paste code help wordcount'
+                            ],
+                            toolbar: 'bold italic underline forecolor| alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' ,
+                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:12px }'}"></editor>
+                    <div id="flashcardFronttHelp" class="form-text">
+                        * El campo es requerido.<br>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="flashcardBack" class="form-label">Dorso</label>
+                    <editor formControlName="answer"
+                        [init]="{
+                            menubar: false,
+                            plugins: [
+                              'advlist autolink autoresize lists link image charmap print preview anchor',
+                              'searchreplace visualblocks code fullscreen',
+                              'insertdatetime media table paste code help wordcount'
+                            ],
+                            toolbar: 'bold italic underline forecolor| alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' ,
+                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:12px }'}"></editor>
+                    <div id="flashcardBacktHelp" class="form-text">
+                        * El campo es requerido.<br>
+                    </div>
+                </div>
+
+                <p *ngIf="isEditMode" class="font-monospace">
+                    <span>Creada por: {{flashcard.createdBy}}<br></span>
+                    <span>Creada el: {{flashcard.createdAt | date: 'EEEE, d \' de \' MMMM  \' de \' y, HH:mm:ss zzzz':'GMT-03:00':'es-AR'}}<br></span>
+                    <span *ngIf="flashcard.lastUpdateBy">Modificada por: {{flashcard.lastUpdateBy}}<br></span>
+                    <span *ngIf="flashcard.lastUpdateBy">Modificada el: {{flashcard.lastUpdateAt | date: 'EEEE, d \' de \' MMMM  \' de \' y, HH:mm:ss zzzz':'GMT-03:00':'es-AR'}}<br></span>
+                </p>
+
+                <button type="submit"
+                    [disabled]="!flashcardForm.valid || flashcardForm.pristine"
+                    class="btn btn-success">
+                    <i class="far fa-save me-2"></i>Guardar
+                </button>
+            </form>
+        </div>        
+    </div>
+</div>

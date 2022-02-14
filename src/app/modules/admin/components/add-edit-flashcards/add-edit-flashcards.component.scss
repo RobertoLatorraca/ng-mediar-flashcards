@@ -1,0 +1,16 @@
+input, select {
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid gray;
+    border-radius: 0px;
+    width: 100%;
+}
+
+.form-control:focus, .form-select:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #198754;
+    outline: 0;
+    box-shadow: none; 
+}
+

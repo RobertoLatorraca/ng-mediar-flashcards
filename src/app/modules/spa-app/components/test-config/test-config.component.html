@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="col-md-8 col-xl-5">
+            <label for="quantityFlashcards" class="form-label">Cantidad de tarjetas</label>
+            <select 
+                [(ngModel)]="testSize"
+                id="quantityFlashcards"
+                class="form-select form-select-sm"
+                aria-label=".form-select-sm example">
+                <option value="5" selected>{{selectionTestSizeDefaultText}}</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="0">Todas</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="col-md-8 col-xl-5">
+            <div class="list-group">
+                <a (click)="selectGroup('module')"
+                    [ngClass]="groupActive == 'module' ? 'list-group-item-success active' : ''"
+                    class="list-group-item list-group-item-action">
+                    Tarjetas por módulo
+                </a>
+                <a (click)="selectGroup('bibliography')"
+                    [ngClass]="groupActive == 'bibliography' ? 'list-group-item-success active' : ''"
+                    class="list-group-item list-group-item-action">
+                    Tarjetas por bibliografía
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center mb-3">
+        <div class="col-md-8 col-xl-5">
+            <div class="list-group">
+                <a *ngFor="let item of listActive; let i = index"
+                    (click)='selectItemList(i)'
+                    [ngClass]="itemListActive == i ? 'list-group-item-success active' : ''"
+                    class="list-group-item list-group-item-action">
+                    {{item}}
+                </a>
+            </div>          
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4 col-xl-2 d-flex justify-content-center">
+            <button type="button" class="btn btn-success" (click)="runFlashcards()">Comenzar</button>
+        </div>
+    </div>
+    
+</div>

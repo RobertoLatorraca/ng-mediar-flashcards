@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/fontawesome-free-5.15.4-web/scss/fontawesome.scss";
+@import "assets/fontawesome-free-5.15.4-web/scss/solid.scss";
+@import "assets/fontawesome-free-5.15.4-web/scss/regular.scss";
+@import "assets/fontawesome-free-5.15.4-web/scss/brands.scss";
+
+@font-face {
+    font-family: 'Poppins';
+    src: url(../src/assets/fonts/poppins/Poppins-Regular.ttf) format('truetype');
+    font-style: normal;
+    font-weight: 400;
+}
+
+html {
+    font-size: 12px;
+}
+
+body {
+    font-family: 'Poppins';
+}

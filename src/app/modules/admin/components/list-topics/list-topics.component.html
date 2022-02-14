@@ -1,0 +1,30 @@
+<div class="container-fluid mb-4">
+
+    <button type="button" class="btn btn-success" (click)="addTopic()"><i class="fas fa-plus me-2"></i>Agregar tema</button>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tema</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let topic of topics; let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{topic.topic}}</td>
+            <td>
+                <span *ngIf="topic.enabled" class="badge bg-success">Habilitado</span>
+                <span *ngIf="!topic.enabled" class="badge bg-danger">Deshabilitado</span>
+            </td>
+            <td>
+                <a (click)="editTopic(topic)"><i class="fas fa-pencil-alt me-2"></i></a>
+                <a (click)="toggleTopicEnabled(topic)"><i class="fas fa-ban"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

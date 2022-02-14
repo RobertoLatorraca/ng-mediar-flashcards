@@ -1,0 +1,39 @@
+<div class="col-md-6 col-xl-4 mx-auto">
+    <div class="card">
+        <div class="card-header">
+            # 1 / 50 - Título de la tarjeta
+        </div>
+        <div class="card-body">
+            <div *ngIf="showFrontFlashcard">
+                <h5 class="card-title">Front</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div *ngIf="showBackFlashcard">
+                <h5 class="card-title">Back</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div [class.justify-content-center]="showFrontFlashcard"
+                [class.justify-content-between]="showBackFlashcard"
+                class="d-flex align-items-center mt-2 py-2">
+                <div *ngIf="showBackFlashcard">
+                    <span class="fs-1" style="color: red;"><i class="far fa-times-circle"></i></span>
+                </div>
+                <div>
+                    <a (click)="toggleSide()" class="btn btn-success">Voltear</a>
+                </div>
+                <div *ngIf="showBackFlashcard">
+                    <span class="fs-1" style="color: green;"><i class="far fa-check-circle"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 ">
+        <p>Ayuda:</p>
+        <ol>
+            <li>Leé el enunciado del frente de la tarjeta y pensá en la respuesta.</li>
+            <li>Girá la tarjeta.</li>
+            <li>Si acertaste a la respuesta cliqueá en <i class="fas fa-check"></i>, sino cliqueá en <i class="fas fa-times"></i>.</li>
+            <li>Continuá con la siguiente tarjeta hasta terminar el test.</li>
+        </ol>
+    </div>
+</div>
